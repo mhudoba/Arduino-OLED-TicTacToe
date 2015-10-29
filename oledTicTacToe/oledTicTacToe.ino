@@ -33,6 +33,10 @@ U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_DEV_0|U8G_I2C_OPT_NO_ACK|U8G_I2C_OPT_FAST)
 #define joyPinY2 3
 #define joyPinB2 4
 
+#define SVK false //Slovak language
+#define ENG true //English language
+bool lang = ENG; //ENG - English language, SVK - Slovak language
+
 uint8_t selX = 2;
 uint8_t selY = 2;
 uint16_t scoreX, scoreO;
@@ -60,7 +64,7 @@ void playerSwitch() {
 void draw(void) {
   u8g.firstPage();
   do {
-    // GAME FIELD //////////////////////////
+    //draws the game field
     u8g.drawFrame(0, 0, 64, 64); //frame
     u8g.drawLine(0, 21, 63, 21); //horizontal line
     u8g.drawLine(0, 42, 63, 42); //horizontal line
@@ -74,9 +78,8 @@ void draw(void) {
         else if (field[i][j] == 'X'){drawCross(coords[i], coords[j]);}
       }
     }
-    // GAME FIELD //////////////////////////
     
-    // SELECTION BOX ///////////////////////
+    //draws the selection box
     uint8_t selBoxX, selBoxY;
     if (selX == 1){selBoxX = 1;}
     else if (selX == 2){selBoxX = 22;}
@@ -88,10 +91,11 @@ void draw(void) {
     
     u8g.drawFrame(selBoxX, selBoxY, 20, 20);
     u8g.drawFrame(selBoxX+1, selBoxY+1, 18, 18);
-    // SELECTION BOX ///////////////////////
-    
+
+    //draws the sidebar
     u8g.setFont(u8g_font_helvB08);
-    u8g.drawStr(81, 10, "SCORE");
+    if (lang == SVK){u8g.drawStr(81, 10, "SKORE");}
+    else if (lang == ENG){u8g.drawStr(81, 10, "SCORE");}    
     u8g.drawStr(75, 24, "X:");
     u8g.setPrintPos(88, 24);
     u8g.print(scoreX);
@@ -100,7 +104,8 @@ void draw(void) {
     u8g.print(scoreO);
     
     u8g.setFont(u8g_font_5x8);
-    u8g.drawStr(75, 46, "Player:");
+    if (lang == SVK){u8g.drawStr(75, 46, "Na rade:");}
+    else if (lang == ENG){u8g.drawStr(75, 46, "Player:");}    
     if (player == 'X'){drawCross(93, 50);}
     else if (player == 'O'){drawCircle(93 , 50);}
   } while(u8g.nextPage());
@@ -134,13 +139,16 @@ void drawWin(char player) {
     if (player == 'X') {
       u8g.drawLine(x, y, x + 20, y + 20); //top left - bottom right slash
       u8g.drawLine(x + 20, y, x, y + 20); //down left - top right slash
-      u8g.drawStr(48, 54, "Won!");
+      if (lang == SVK){u8g.drawStr(34, 54, "Vyhral!");}
+      else if (lang == ENG){u8g.drawStr(48, 54, "Won!");}
     } else if (player == 'O') {
       u8g.drawEllipse(x + 10, y + 12, 12, 12);
-      u8g.drawStr(48, 54, "Won!");
+      if (lang == SVK){u8g.drawStr(34, 54, "Vyhral!");}
+      else if (lang == ENG){u8g.drawStr(48, 54, "Won!");}
     } else if (player == 'T') {
       u8g.setFont(u8g_font_courB18);
-      u8g.drawStr(42, 41, "TIE");
+      if (lang == SVK){u8g.drawStr(17, 41, "REMIZA");}
+      else if (lang == ENG){u8g.drawStr(42, 41, "TIE");}      
     }
   } while(u8g.nextPage());
 
