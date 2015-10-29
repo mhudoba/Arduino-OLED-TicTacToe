@@ -127,7 +127,9 @@ void drawWin(char player) {
 
   //draws the win screen  
   u8g.firstPage();
- do {
+  do {
+    #define x 54
+    #define y 11
     u8g.setFont(u8g_font_9x18B);      
     if (player == 'X') {
       u8g.drawStr(14, 22, "Vyhral hrac");
