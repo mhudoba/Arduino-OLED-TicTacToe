@@ -91,7 +91,7 @@ void draw(void) {
     // SELECTION BOX ///////////////////////
     
     u8g.setFont(u8g_font_helvB08);
-    u8g.drawStr(81, 10, "SKORE");
+    u8g.drawStr(81, 10, "SCORE");
     u8g.drawStr(75, 24, "X:");
     u8g.setPrintPos(88, 24);
     u8g.print(scoreX);
@@ -100,7 +100,7 @@ void draw(void) {
     u8g.print(scoreO);
     
     u8g.setFont(u8g_font_5x8);
-    u8g.drawStr(75, 46, "Na rade:");
+    u8g.drawStr(75, 46, "Player:");
     if (player == 'X'){drawCross(93, 50);}
     else if (player == 'O'){drawCircle(93 , 50);}
   } while(u8g.nextPage());
@@ -213,7 +213,7 @@ void loop() {
   else if ((field[2][0] == 'O') && (field[2][1] == 'O') && (field[2][2] == 'O')){drawWin('O');}
   else if ((field[0][0] == 'O') && (field[1][1] == 'O') && (field[2][2] == 'O')){drawWin('O');}
   else if ((field[2][0] == 'O') && (field[1][1] == 'O') && (field[0][2] == 'O')){drawWin('O');}
-  else if ((fieldx[0][0] == true) && (fieldx[0][1] == true) && (fieldx[0][2] == true) && (fieldx[1][0] == true) && (fieldx[1][1] == true) && (fieldx[1][2] == true) && (fieldx[2][0] == true) && (fieldx[2][1] == true) && (fieldx[2][2] == true)){drawWin('R');}
+  else if ((fieldx[0][0] == true) && (fieldx[0][1] == true) && (fieldx[0][2] == true) && (fieldx[1][0] == true) && (fieldx[1][1] == true) && (fieldx[1][2] == true) && (fieldx[2][0] == true) && (fieldx[2][1] == true) && (fieldx[2][2] == true)){drawWin('T');}
   
   draw();
 }
