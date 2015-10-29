@@ -127,20 +127,18 @@ void drawWin(char player) {
 
   //draws the win screen  
   u8g.firstPage();
-  do {
-    #define x 54
-    #define y 11
+ do {
     u8g.setFont(u8g_font_9x18B);      
     if (player == 'X') {
+      u8g.drawStr(14, 22, "Vyhral hrac");
       u8g.drawLine(x, y, x + 20, y + 20); //top left - bottom right slash
       u8g.drawLine(x + 20, y, x, y + 20); //down left - top right slash
-      u8g.drawStr(48, 54, "Won!");
     } else if (player == 'O') {
+      u8g.drawStr(14, 22, "Vyhral hrac");
       u8g.drawEllipse(x + 10, y + 12, 12, 12);
-      u8g.drawStr(48, 54, "Won!");
-    } else if (player == 'T') {
+    } else if (player == 'R') {
       u8g.setFont(u8g_font_courB18);
-      u8g.drawStr(42, 41, "TIE");
+      u8g.drawStr(17, 41, "REMIZA");
     }
   } while(u8g.nextPage());
 
